@@ -1,0 +1,81 @@
+<!-- Noemie Baudouin -->
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de usuarios</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+
+<body>
+    <header></header>
+    <main>
+        <h1>Registro de usuarios</h1>
+        <form class="insert_form" action="/" method="post">
+            <label for="nombre">Nombre completo (*):</label>
+            <input autocomplete="off" autofocus name="nombre" placeholder="Nombre completo" type="text">
+            <br>
+            <br>
+            <label for="email">Email (*):</label>
+            <input autocomplete="off" autofocus name="email" placeholder="Email" type="email">
+            <br>
+            <br>
+            <label for="edad">Edad:</label>
+            <input autocomplete="off" autofocus name="edad" placeholder="Edad" type="text" size="3">
+            <br>
+            <br>
+            <button class="guardar" type="submit">Guardar Usuario</button>
+        </form>
+
+        <h2 class="mensaje">{{ mensaje }}{{ error }}</h2>
+
+
+        <h2>Usuarios Registrados</h2>
+
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Edad</th>
+                <th>Modificar</th>
+                <th>Borrar</th>
+                <th>Entrada</th>
+                <th>Salida</th>
+            </tr>
+
+            {% if row_modificar %}
+            {% block modificar %}{% endblock %}
+            {% endif %}
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario["id"] }}</td>
+                <td>{{ usuario["nombre"] }}</td>
+                <td>{{ usuario["email"] }}</td>
+                <td>{{ usuario["edad"] }}</td>
+                <td>
+                    <form action="/modificar" method="post">
+                        <input name="modificar_id" type="hidden" value="{{ usuario['id'] }}">
+                        <button class="editar" type="submit">🔁</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/borrar" method="post">
+                        <input name="borrar_id" type="hidden" value="{{ usuario['id'] }}">
+                        <button class="editar" type="submit">❌</button>
+                    </form>
+                </td>
+                <td>{{ usuario["entrada"] }}</td>
+                <td>{{ usuario["salida"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </main>
+
+</body>
+
+</html>

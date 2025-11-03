@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+
+{% block modificar %}
+<tr class="row_mod">
+    <form action="/" method="post">
+        <td>{{ row_modificar["id"] }}</td>
+        <td>
+            <input autocomplete="off" autofocus name="nombre_modificar" placeholder="{{ row_modificar['nombre'] }}"
+                type="text">
+        </td>
+        <td>
+            <input autocomplete="off" autofocus name="email_modificar" placeholder="{{ row_modificar['email'] }}"
+                type="email">
+        </td>
+        <td>
+            <input autocomplete="off" autofocus name="edad_modificar" placeholder="{{ row_modificar['edad'] }}"
+                type="text" size="3">
+        </td>
+        <td>
+            <input name="id_modificar" type="hidden" value="{{ row_modificar['id'] }}">
+            <button class="editar" type="submit">✅</button>
+        </td>
+    </form>
+    <form action="/borrar" method="post">
+        <td>
+            <input name="borrar_id" type="hidden" value="{{ row_modificar['id'] }}">
+            <button class="editar" type="submit">❌</button>
+        </td>
+    </form>
+    <form action="/hora_entrada" method="post">
+        <td>
+            <input name="entrada_id" type="hidden" value="{{ row_modificar['id'] }}">
+            <button class="editar" type="submit">⏳ in</button>
+        </td>
+    </form>
+    <form action="/hora_salida" method="post">
+        <td>
+            <input name="salida_id" type="hidden" value="{{ row_modificar['id'] }}">
+            <button class="editar" type="submit">⏳ out</button>
+        </td>
+    </form>
+</tr>
+{% endblock %}
